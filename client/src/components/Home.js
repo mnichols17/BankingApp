@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 class Home extends React.Component {
 
     state = {
-        accounts: []
+        accounts: [],
+        transactions: []
     }
 
     componentDidMount = () => {
@@ -14,15 +15,31 @@ class Home extends React.Component {
             accounts: res.data
         }))
         .catch(err => console.log(err))
+
+        axios.get('/api/transactions')
+        .then(res => this.setState({
+            transactions: res.data
+        }))
+        .catch(err => console.log(err))
     }
 
     render() {
         return (
             <div>
+                <h1>ACCOUNTS</h1>
                 <ul>
                     {this.state.accounts.map(account => {
                         return(
                             <li key={account.id}><Link to={`/profile/${account.id}`}>{account.id} - {account.firstName} {account.lastName} - ${account.balance}</Link></li>
+                        )
+                    })}
+                </ul>
+                <br />
+                <h1>TRANSACTIONS</h1>
+                <ul>
+                    {this.state.transactions.map(transaction => {
+                        return(
+                            <li key={transaction.number}>User {transaction.userId}, {transaction.type}: ${transaction.amount}</li>
                         )
                     })}
                 </ul>
