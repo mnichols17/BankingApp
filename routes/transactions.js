@@ -12,4 +12,8 @@ router.get('/', (req, res) => {
     res.json(transactions);
 })
 
+router.post('/:id', (req, res) => {
+    res.json(transactions[transactions.length - 1])
+})
+
 module.exports = router;

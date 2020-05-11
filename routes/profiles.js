@@ -19,6 +19,7 @@ router.post('/', (req, res) => {
         lastName: req.body.lastName,
         balance: req.body.balance
     })
+    // POST to transactions to add initial deposit
     res.json(profiles)
 })
 
