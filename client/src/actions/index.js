@@ -24,6 +24,20 @@ export const createAccount = (firstName, lastName, balance) => dispatch => {
     })
 }
 
+export const editAccount = ({id, firstName, lastName, balance}) => dispatch => {
+    axios({
+        method: "put",
+        url: `/api/profiles/${id}`,
+        data: { id, firstName, lastName, balance}
+    })
+    .then(res => {
+        dispatch({
+            type: "EDIT_ACCOUNT",
+            payload: res.data
+        })
+    })
+}
+
 export const deleteAccount = (id) => dispatch => {
     axios.delete(`/api/profiles/${id}`)
     .then(res => {

@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-    const prevID = profiles[profiles.length - 1].id
+    const prevID = profiles.length === 0 ? -1 : profiles[profiles.length - 1].id
     profiles.push({
         id: prevID + 1,
         firstName: req.body.firstName,
@@ -23,7 +23,7 @@ router.post('/', (req, res) => {
     res.json(profiles)
 })
 
-router.post('/:id', (req, res) => {
+router.put('/:id', (req, res) => {
     const id = req.params.id;
     const profileIndex = profiles.findIndex(profile => parseInt(id) === profile.id)
     profiles[profileIndex] = req.body
@@ -34,6 +34,7 @@ router.delete('/:id', (req, res) => {
     const id = req.params.id
     const profileIndex = profiles.findIndex(profile => parseInt(id) === profile.id)
     profiles.splice(profileIndex, 1)
+    // REMOVE all user transactions as well
     res.json(profiles)
 })
 

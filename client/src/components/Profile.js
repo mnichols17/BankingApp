@@ -2,33 +2,34 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getAccounts, deleteAccount } from '../actions/index'
 
-const userExists = ({id, firstName, lastName, balance}, editAccount) => {
+import EditAccount from './EditAccount';
+
+const accountExists = ({id, firstName, lastName, balance}, editAccount, deleteAccount) => {
     return (
         <div>
             <h1>Name: {firstName} {lastName}</h1>
             <h1>Balance: ${balance}</h1>
             {/* Add Form for deposit / withdraw */}
-            <button onClick={editAccount} id={id} value="edit">Edit Account Information</button>
-            <button onClick={editAccount} id={id} value="delete">Delete Account</button>
+            <button onClick={editAccount} id={id}>Edit Account Information</button>
+            <button onClick={deleteAccount} id={id}>Delete Account</button>
         </div>
     )
 }
 
 class Profile extends React.Component {
+
+    state = {
+        edit: false
+    }
     
     componentDidMount = () => {
         this.props.getAccounts();
     }
 
-    editAccount = e => {
+    deleteAccount = e => {
         e.preventDefault();
-        if(e.target.value === "edit"){
-            console.log("EDIT")
-            console.log(e.target.id)
-        } else {
-            this.props.deleteAccount(e.target.id);
-            this.props.history.push("/");
-        }
+        this.props.deleteAccount(e.target.id);
+        this.props.history.push("/");
     }
 
     render() {
@@ -36,7 +37,9 @@ class Profile extends React.Component {
 
         return(
             <div>
-                {accountID === -1 ? <h1>ACCOUNT NOT FOUND</h1> : userExists(this.props.accounts[accountID], this.editAccount)}
+                {accountID === -1 ? <h1>ACCOUNT NOT FOUND</h1> : accountExists(this.props.accounts[accountID], () => {this.setState({edit: true})}, this.deleteAccount)}
+                <br />
+                {!this.state.edit ? null : <EditAccount edited={() => this.setState({edit: false})} account={this.props.accounts[accountID]} />}
             </div>
         )
     }

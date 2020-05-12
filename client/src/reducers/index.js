@@ -18,6 +18,11 @@ export default function accountReducer(state, action) {
                 ...state,
                 accounts: [...action.payload]
             }
+        case("EDIT_ACCOUNT"):
+            return {
+                ...state,
+                accounts: [...action.payload]
+            }
         case("DELETE_ACCOUNT"):
             return {
                 ...state,
