@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getAccounts } from '../actions/index'
+import { getAccounts } from '../actions/accountActions'
 
 class Home extends React.Component {
 
@@ -47,7 +47,7 @@ class Home extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        accounts: state.accounts
+        accounts: state.accounts.accounts
     }
 }
 

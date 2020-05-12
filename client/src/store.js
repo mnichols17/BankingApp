@@ -2,10 +2,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import Thunk from 'redux-thunk';
 import reducer from './reducers/index';
 
-const initialState = {
-    accounts: [],
-    //transactions: []
-};
+const initialState = {};
 
 const middleware = [Thunk];
 

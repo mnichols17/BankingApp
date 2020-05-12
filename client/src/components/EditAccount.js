@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { editAccount } from '../actions/index'
+import { editAccount } from '../actions/accountActions'
 
 class EditAccount extends React.Component {
 

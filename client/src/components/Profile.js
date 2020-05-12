@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getAccounts, deleteAccount } from '../actions/index'
+import { getAccounts, deleteAccount } from '../actions/accountActions'
 
 import EditAccount from './EditAccount';
 
@@ -47,7 +47,7 @@ class Profile extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        accounts: state.accounts
+        accounts: state.accounts.accounts
     }
 }
 
