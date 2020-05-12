@@ -1,6 +1,5 @@
 const defaultState = {
-    accounts: [],
-    //transactions: []
+    accounts: []
 }
 
 export default function (state = defaultState, action) {

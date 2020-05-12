@@ -2,7 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getAccounts } from '../actions/accountActions'
+import { getAccounts } from '../actions/accountActions';
+import { getTransactions } from '../actions/transactionActions';
 
 class Home extends React.Component {
 
@@ -13,6 +14,7 @@ class Home extends React.Component {
 
     componentDidMount = async() => {
         this.props.getAccounts();
+        this.props.getTransactions();
         axios.get('/api/transactions')
         .then(res => this.setState({
             transactions: res.data
@@ -34,7 +36,7 @@ class Home extends React.Component {
                 <br />
                 <h1>TRANSACTIONS</h1>
                 <ul>
-                    {this.state.transactions.map(transaction => {
+                    {this.props.transactions.map(transaction => {
                         return(
                             <li key={transaction.number}>User {transaction.userId}, {transaction.type}: ${transaction.amount}</li>
                         )
@@ -47,8 +49,9 @@ class Home extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        accounts: state.accounts.accounts
+        accounts: state.accounts.accounts,
+        transactions: state.transactions.transactions
     }
 }
 
-export default connect(mapStateToProps, {getAccounts})(Home);
+export default connect(mapStateToProps, {getAccounts, getTransactions})(Home);
