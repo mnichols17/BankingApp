@@ -1,57 +1,51 @@
 import React from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { getAccounts, deleteAccount } from '../actions/index'
 
-const userExists = (fullName, balance, editAccount) => {
+const userExists = ({id, firstName, lastName, balance}, editAccount) => {
     return (
         <div>
-            <h1>Name: {fullName}</h1>
+            <h1>Name: {firstName} {lastName}</h1>
             <h1>Balance: ${balance}</h1>
             {/* Add Form for deposit / withdraw */}
-            <button onClick={editAccount} value="edit">Edit Account Information</button>
-            <button onClick={editAccount} value="delete">Delete Account</button>
+            <button onClick={editAccount} id={id} value="edit">Edit Account Information</button>
+            <button onClick={editAccount} id={id} value="delete">Delete Account</button>
         </div>
     )
 }
 
 class Profile extends React.Component {
-
-    state = {
-        id: "",
-        fullName: "",
-        balance: "N/A"
-    }
-
+    
     componentDidMount = () => {
-        axios.get(`/api/profiles/${this.props.match.params.id}`)
-        .then(res => {
-            this.setState({
-                id: res.data.id,
-                fullName: `${res.data.firstName} ${res.data.lastName}`,
-                balance: res.data.balance
-            })
-        })
-        .catch(err => console.log(err))
+        this.props.getAccounts();
     }
 
-    editAccount = (e) => {
+    editAccount = e => {
         e.preventDefault();
         if(e.target.value === "edit"){
             console.log("EDIT")
+            console.log(e.target.id)
         } else {
-            console.log("DELETE")
+            this.props.deleteAccount(e.target.id);
+            this.props.history.push("/");
         }
     }
 
     render() {
-
-        let view = this.state.id !== -1 ? userExists(this.state.fullName, this.state.balance, this.editAccount) : <h1>USER DOES NOT EXIST!</h1>
+        const accountID = this.props.accounts.findIndex(account => parseInt(this.props.match.params.id) === account.id);
 
         return(
             <div>
-                {view}
+                {accountID === -1 ? <h1>ACCOUNT NOT FOUND</h1> : userExists(this.props.accounts[accountID], this.editAccount)}
             </div>
         )
     }
 }
 
-export default Profile;
+const mapStateToProps = state => {
+    return {
+        accounts: state.accounts
+    }
+}
+
+export default connect(mapStateToProps, {getAccounts, deleteAccount})(Profile);

@@ -1,5 +1,6 @@
 import React from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { createAccount } from '../actions/index'
 
 class Register extends React.Component {
 
@@ -15,23 +16,12 @@ class Register extends React.Component {
         })
     }
 
-
-    onSubmit = (e) => {
+    onSubmit = e => {
         e.preventDefault();
         if(this.state.firstName === '' || this.state.lastName === ''){
             alert("Please enter both a first and last name")
         } else {
-            axios({
-                method: "post",
-                url: '/api/profiles',
-                data: {
-                    firstName: this.state.firstName,
-                    lastName: this.state.lastName,
-                    balance: this.state.balance
-                }
-            })
-            .then(res => console.log(res.data))
-            .catch(err => console.log(err))
+            this.props.createAccount(this.state.firstName, this.state.lastName, this.state.balance)
         }
         this.props.history.push('/')
     }
@@ -57,4 +47,4 @@ class Register extends React.Component {
     }
 }
 
-export default Register;
+export default connect(null, {createAccount})(Register);

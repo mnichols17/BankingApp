@@ -23,16 +23,17 @@ router.post('/', (req, res) => {
     res.json(profiles)
 })
 
-router.get('/:id', (req, res) => {
-    const id = req.params.id;
-    const profileID = profiles.findIndex(profile => parseInt(id) === profile.id)
-    res.json(profileID !== -1 ? profiles[profileID] : {id: -1})
-})
-
 router.post('/:id', (req, res) => {
     const id = req.params.id;
-    const profileID = profiles.findIndex(profile => parseInt(id) === profile.id)
-    profiles[profileID] = req.body
+    const profileIndex = profiles.findIndex(profile => parseInt(id) === profile.id)
+    profiles[profileIndex] = req.body
+    res.json(profiles)
+})
+
+router.delete('/:id', (req, res) => {
+    const id = req.params.id
+    const profileIndex = profiles.findIndex(profile => parseInt(id) === profile.id)
+    profiles.splice(profileIndex, 1)
     res.json(profiles)
 })
 
