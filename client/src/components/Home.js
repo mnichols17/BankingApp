@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getAccounts } from '../actions/accountActions';
-import { getTransactions } from '../actions/transactionActions';
+
+import "../styles/home.css";
 
 class Home extends React.Component {
 
@@ -12,24 +13,20 @@ class Home extends React.Component {
 
     render() {
         return (
-            <div>
-                <h1>ACCOUNTS</h1>
-                <ul>
-                    {this.props.accounts.map(account => {
-                        return(
-                            <li key={account.id}><Link to={`/profile/${account.id}`}>{account.id} - {account.firstName} {account.lastName} - ${account.balance}</Link></li>
-                        )
-                    })}
-                </ul>
+            <div className="container" style={{background:"white"}}>
+                <div className="container p-3">
+                    <h1>Accounts</h1>
+                    <ul id="accountsList" className="list-group list-group-flush">
+                        {this.props.accounts.map(account => {
+                            return(
+                                <Link to={`/profile/${account.id}`} key={account.id} className="accountsList-item">
+                                    <li className="list-group-item">{account.firstName} {account.lastName} - Balance: <span style={{color: "#F1948A"}}>${account.balance}</span></li>
+                                </Link>
+                            )
+                        })}
+                    </ul>
+                </div>
                 <br />
-                <h1>TRANSACTIONS</h1>
-                <ul>
-                    {this.props.transactions.map(transaction => {
-                        return(
-                            <li key={transaction.number}>User {transaction.userId}, {transaction.type}: ${transaction.amount}</li>
-                        )
-                    })}
-                </ul>
             </div>
         )
     }
@@ -38,8 +35,7 @@ class Home extends React.Component {
 const mapStateToProps = state => {
     return {
         accounts: state.accounts.accounts,
-        transactions: state.transactions.transactions
     }
 }
 
-export default connect(mapStateToProps, {getAccounts, getTransactions})(Home);
+export default connect(mapStateToProps, {getAccounts})(Home);

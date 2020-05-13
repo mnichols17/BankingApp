@@ -1,0 +1,8 @@
+#header {
+    background: white;
+}
+
+#header li:hover {
+    text-decoration: none;
+    color: #E74C3C;
+}

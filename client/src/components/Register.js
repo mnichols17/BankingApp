@@ -29,21 +29,23 @@ class Register extends React.Component {
 
     render() {
         return(
-            <form onSubmit={this.onSubmit}>
-                <div className="form-group">
-                    <label htmlFor="firstName">First Name:</label>
-                    <input onChange={this.onChange} value={this.state.firstName} type="text" className="form-control" id="firstName" />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="lastName">Last Name:</label>
-                    <input onChange={this.onChange} value={this.state.lastName} type="text" className="form-control" id="lastName" />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="balance">Balance</label>
-                    <input onChange={this.onChange} value={this.state.balance} type="number" className="form-control" id="balance" />
-                </div>
-                <button type="submit" className="btn btn-primary">Submit</button>
-            </form>
+            <div className="container p-3" style={{background: "white"}}>
+                <form onSubmit={this.onSubmit}>
+                    <div className="form-group">
+                        <label htmlFor="firstName">First Name:</label>
+                        <input onChange={this.onChange} value={this.state.firstName} type="text" className="form-control" id="firstName" />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="lastName">Last Name:</label>
+                        <input onChange={this.onChange} value={this.state.lastName} type="text" className="form-control" id="lastName" />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="balance">Balance</label>
+                        <input onChange={this.onChange} value={this.state.balance} type="number" min="0" className="form-control" id="balance" />
+                    </div>
+                    <button type="submit" className="btn btn-primary">Submit</button>
+                </form>
+            </div>
         )
     }
 }

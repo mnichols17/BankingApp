@@ -1,0 +1,16 @@
+#accountsList {
+    border: 2px black solid;
+}
+
+#accountsList li:hover {
+    background: lightgray;
+}
+
+.accountsList-item {
+    color: black;
+}
+
+.accountsList-item:hover {
+    text-decoration: none;
+    color: black;
+}

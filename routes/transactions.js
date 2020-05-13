@@ -8,16 +8,19 @@ let transactions = [
     {number: 4, userId: 2, amount: 5, type: "Deposit"},
 ]
 
+// Gets all transactions
 router.get('/', (req, res) => {
     res.json(transactions);
 })
 
+// Creates a transaction for a user
 router.post('/:id', (req, res) => {
     const newTransactionID = transactions.length - 1 + 1
     transactions[newTransactionID] = {number: newTransactionID+1, userId: parseInt(req.params.id), amount: parseFloat(req.body.amount), type: req.body.type}
     res.json(transactions[newTransactionID])
 })
 
+// When an account is deleted, all their transactions are deleted as well
 router.delete('/:id', (req, res) => {
     transactions = transactions.filter(({userId}) => parseInt(req.params.id) !== userId)
     res.json(transactions)
