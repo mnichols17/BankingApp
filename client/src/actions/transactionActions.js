@@ -3,7 +3,6 @@ import axios from 'axios';
 export const getTransactions = () => dispatch => {
     axios.get('/api/transactions')
     .then(res => {
-        console.log(res.data)
         dispatch({
         type: "GET_TRANSACTIONS",
         payload: res.data
@@ -18,7 +17,6 @@ export const createTransaction = (id, amount, type) => dispatch => {
         data: { amount, type }
     })
     .then(res => {
-        console.log(res.data)
         dispatch({
             type: "CREATE_TRANSACTION",
             payload: res.data
@@ -26,6 +24,15 @@ export const createTransaction = (id, amount, type) => dispatch => {
     })
 }
 
-export const deleteTransaction = () => dispatch => {
-    
+export const deleteTransactions = (id) => dispatch => {
+    axios({
+        method: "delete",
+        url: `/api/transactions/${id}`
+    })
+    .then(res => {
+        dispatch({
+            type: "DELETE_TRANSACTION",
+            payload: res.data
+        })
+    })
 }

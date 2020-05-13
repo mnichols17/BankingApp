@@ -19,7 +19,7 @@ router.post('/', (req, res) => {
         id: prevID + 1,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        balance: req.body.balance
+        balance: parseInt(req.body.balance)
     }
     profiles.push(newAccount)
     res.json(newAccount)
@@ -29,7 +29,8 @@ router.post('/', (req, res) => {
 router.put('/balance', (req, res) => {
     const profileIndex = profiles.findIndex(profile => parseInt(req.body.id) === profile.id)
     const currBalance = profiles[profileIndex].balance
-    profiles[profileIndex].balance = req.body.type === "deposit" ? currBalance + parseFloat(req.body.amount) : currBalance - parseFloat(req.body.amount)
+    console.log(currBalance + parseFloat(req.body.amount))
+    profiles[profileIndex].balance = req.body.type === "Deposit" ? currBalance + parseFloat(req.body.amount) : currBalance - parseFloat(req.body.amount)
     res.json(profiles)
 })
 

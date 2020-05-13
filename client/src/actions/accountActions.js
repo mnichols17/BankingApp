@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getTransactions, createTransaction } from './transactionActions';
+import { getTransactions, createTransaction, deleteTransactions } from './transactionActions';
 
 export const getAccounts = () => dispatch => {
     axios.get('/api/profiles')
@@ -52,6 +52,7 @@ export const editBalance = (id, amount, type) => dispatch => {
 }
 
 export const deleteAccount = (id) => dispatch => {
+    dispatch(deleteTransactions(id));
     axios.delete(`/api/profiles/${id}`)
     .then(res => {
         dispatch({

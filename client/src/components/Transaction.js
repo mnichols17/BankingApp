@@ -17,10 +17,11 @@ class Transaction extends React.Component {
 
     handleTransaction = e => {
         e.preventDefault();
+        console.log(this.props.balance)
         if(this.state.amount < 0){
             alert("Please enter a positive number")
         }
-        else if(e.target.id === "withdraw" && this.props.balance < this.state.amount){
+        else if(e.target.id === "Withdraw" && this.props.balance < this.state.amount){
             alert("You don't have enough in your current balance to withdraw that amount!")
         } else {
             this.props.editBalance(this.props.id, this.state.amount, e.target.id);
@@ -36,8 +37,8 @@ class Transaction extends React.Component {
             <form onSubmit={this.onSubmit}>
                 <label htmlFor="amount">Amount $</label>
                 <input onChange={this.onChange} value={this.state.amount} min="0" type="number" id="amount" />
-                <button onClick={this.handleTransaction} id="deposit">Deposit</button>
-                <button onClick={this.handleTransaction} id="withdraw">Withdraw</button>
+                <button onClick={this.handleTransaction} id="Deposit">Deposit</button>
+                <button onClick={this.handleTransaction} id="Withdraw">Withdraw</button>
             </form>
         )
     }
