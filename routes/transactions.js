@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 router.post('/:id', (req, res) => {
     const newTransactionID = transactions.length - 1 + 1
     transactions[newTransactionID] = {number: newTransactionID+1, userId: parseInt(req.params.id), amount: parseFloat(req.body.amount), type: req.body.type}
-    res.json(transactions[newTransactionID])
+    res.json(transactions)
 })
 
 // When an account is deleted, all their transactions are deleted as well

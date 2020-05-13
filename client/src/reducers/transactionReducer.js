@@ -9,9 +9,9 @@ export default function (state = defaultState, action) {
                 transactions: action.payload
             }
         case("CREATE_TRANSACTION"):
-            state.transactions.push(action.payload)
             return {
-                ...state
+                ...state,
+                transactions: [...action.payload]
             }
         case("DELETE_TRANSACTION"):
             return {

@@ -43,7 +43,7 @@ class Register extends React.Component {
                         <label htmlFor="balance">Balance</label>
                         <input onChange={this.onChange} value={this.state.balance} type="number" min="0" className="form-control" id="balance" />
                     </div>
-                    <button type="submit" className="btn btn-primary">Submit</button>
+                    <button type="submit" className="btn btn-primary">Create Account</button>
                 </form>
             </div>
         )

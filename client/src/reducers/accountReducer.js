@@ -14,7 +14,7 @@ export default function (state = defaultState, action) {
             return {
                 ...state
             }
-        case("EDIT_ACCOUNT"):
+        case("EDIT_ACCOUNT"): 
             return {
                 ...state,
                 accounts: [...action.payload]

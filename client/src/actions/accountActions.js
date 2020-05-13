@@ -1,10 +1,9 @@
 import axios from 'axios';
-import { getTransactions, createTransaction, deleteTransactions } from './transactionActions';
+import { createTransaction, deleteTransactions } from './transactionActions';
 
 export const getAccounts = () => dispatch => {
     axios.get('/api/profiles')
     .then(res => {
-        dispatch(getTransactions());
         dispatch({
             type: "GET_ACCOUNTS",
             payload: res.data
@@ -20,6 +19,10 @@ export const createAccount = (firstName, lastName, balance) => async dispatch =>
     })
     .then(res => {
         dispatch(createTransaction(res.data.id, balance, "Deposit"));
+        dispatch({
+            type: "CREATE_ACCOUNT",
+            payload: res.data
+        })
     })
 }
 
