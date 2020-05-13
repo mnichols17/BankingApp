@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { createAccount } from '../actions/accountActions'
+import { createAccount } from '../actions/accountActions';
+import { createTransaction } from '../actions/transactionActions';
 
 class Register extends React.Component {
 
@@ -22,8 +23,8 @@ class Register extends React.Component {
             alert("Please enter both a first and last name")
         } else {
             this.props.createAccount(this.state.firstName, this.state.lastName, this.state.balance)
+            this.props.history.push('/')
         }
-        this.props.history.push('/')
     }
 
     render() {
@@ -47,4 +48,4 @@ class Register extends React.Component {
     }
 }
 
-export default connect(null, {createAccount})(Register);
+export default connect(null, {createAccount, createTransaction})(Register);

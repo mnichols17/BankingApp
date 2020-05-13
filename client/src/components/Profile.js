@@ -1,25 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getAccounts, deleteAccount } from '../actions/accountActions'
+import { getAccounts, deleteAccount } from '../actions/accountActions';
 
 import EditAccount from './EditAccount';
-
-const accountExists = ({id, firstName, lastName, balance}, editAccount, deleteAccount) => {
-    return (
-        <div>
-            <h1>Name: {firstName} {lastName}</h1>
-            <h1>Balance: ${balance}</h1>
-            {/* Add Form for deposit / withdraw */}
-            <button onClick={editAccount} id={id}>Edit Account Information</button>
-            <button onClick={deleteAccount} id={id}>Delete Account</button>
-        </div>
-    )
-}
+import Transaction from './Transaction';
 
 class Profile extends React.Component {
 
     state = {
-        edit: false
+        edit: false,
     }
     
     componentDidMount = () => {
@@ -34,12 +23,19 @@ class Profile extends React.Component {
 
     render() {
         const accountID = this.props.accounts.findIndex(account => parseInt(this.props.match.params.id) === account.id);
-
+        const account = this.props.accounts[accountID]
         return(
+            accountID === -1 ? <h1>ACCOUNT NOT FOUND</h1> :
             <div>
-                {accountID === -1 ? <h1>ACCOUNT NOT FOUND</h1> : accountExists(this.props.accounts[accountID], () => {this.setState({edit: true})}, this.deleteAccount)}
+                <div>
+                    <h1>Name: {account.firstName} {account.lastName}</h1>
+                    <h1>Balance: ${account.balance}</h1>
+                    <Transaction balance= {account.balance} id={account.id}/>
+                    <button onClick={() => this.setState({edit: true})}>Edit Account Information</button>
+                    <button onClick={this.deleteAccount} id={account.id}>Delete Account</button>
+                </div>
                 <br />
-                {!this.state.edit ? null : <EditAccount edited={() => this.setState({edit: false})} account={this.props.accounts[accountID]} />}
+                {!this.state.edit ? null : <EditAccount edited={() => this.setState({edit: false})} account={account} />}
             </div>
         )
     }

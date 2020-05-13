@@ -5,14 +5,14 @@ const defaultState = {
 export default function (state = defaultState, action) {
     switch(action.type) {
         case("GET_ACCOUNTS"):
+            state.accounts = action.payload
             return {
-                ...state,
-                accounts: [...action.payload]
+                ...state
             }
         case("CREATE_ACCOUNT"):
+            state.accounts.push(action.payload)
             return {
-                ...state,
-                accounts: [...action.payload]
+                ...state
             }
         case("EDIT_ACCOUNT"):
             return {

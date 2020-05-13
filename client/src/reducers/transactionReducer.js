@@ -5,19 +5,19 @@ const defaultState = {
 export default function (state = defaultState, action) {
     switch(action.type) {
         case("GET_TRANSACTIONS"):
+            console.log(action.payload)
             return {
-                ...state,
-                transactions: [...action.payload]
+                transactions: action.payload
             }
         case("CREATE_TRANSACTION"):
+            state.transactions.push(action.payload)
+            console.log(state)
             return {
-                ...state,
-                transactions: [...action.payload]
+                ...state
             }
         case("DELETE_TRANSACTION"):
             return {
-                ...state,
-                transactions: [...action.payload]
+                ...state
             }
         default:
             return state
