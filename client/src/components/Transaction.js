@@ -33,15 +33,19 @@ class Transaction extends React.Component {
 
     render() {
         return(
-            <form onSubmit={this.onSubmit}>
+            <div>
                 <h2>Balance: ${this.props.balance}</h2>
-                <label htmlFor="amount">Amount $</label>
-                <input onChange={this.onChange} value={this.state.amount} min="0" type="number" id="amount" />
-                <div className="btn-group p-3" role="group">
-                    <button className="btn btn-success" onClick={this.handleTransaction} id="Deposit">Deposit</button>
-                    <button className="btn btn-danger" onClick={this.handleTransaction} id="Withdraw">Withdraw</button>
-                </div>
-            </form>
+                <form style={{display:"flex", flexDirection:"column"}}onSubmit={this.onSubmit}>
+                    <div>
+                        <label htmlFor="amount">Amount $</label>
+                        <input onChange={this.onChange} value={this.state.amount} min="0" type="number" id="amount" />
+                    </div>
+                    <div className="btn-group p-3" role="group">
+                        <button className="btn btn-success" onClick={this.handleTransaction} id="Deposit">Deposit</button>
+                        <button className="btn btn-danger" onClick={this.handleTransaction} id="Withdraw">Withdraw</button>
+                    </div>
+                </form>
+            </div>
         )
     }
 }

@@ -31,7 +31,7 @@ class Profile extends React.Component {
         return(
             accountID === -1 ? <div className="container" style={{background:"white"}}><h1>ACCOUNT NOT FOUND</h1></div> :
             <div className="container" style={{background:"white"}}>
-                <div style={{ display:"flex", justifyContent: "space-evenly"}}>
+                <div id="profile">
                     <div className="profile-content p-2">
                         <h4>ID: {account.id}</h4>
                         <h4>First name: {account.firstName}</h4>

@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom';
 import "../styles/header.css";
 
 class Header extends React.Component {
+
     render() {
+        console.log(this.props.location)
         return(
             <ul id="header" className="nav container my-3 p-3">
                 <Link style={{textDecoration: "none", color: "black"}} to="/"><li className="nav-item mx-2">Home</li></Link>
