@@ -7,6 +7,7 @@ import Header from './Header';
 import Home from './Home';
 import Profile from './Profile';
 import Register from './Register';
+import TransactionList from './TransactionList';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" exact component={Home} />
         <Route path="/profile/:id" component={Profile} />
         <Route path="/register" component={Register} />
+        <Route path="/transactions" component={TransactionList} />
       </Switch>
     </Router>
   );

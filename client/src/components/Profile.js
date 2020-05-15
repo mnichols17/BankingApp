@@ -6,6 +6,7 @@ import { getTransactions } from '../actions/transactionActions';
 import "../styles/profile.css";
 import EditAccount from './EditAccount';
 import Transaction from './Transaction';
+import TransactionList from './TransactionList';
 
 class Profile extends React.Component {
 
@@ -46,16 +47,8 @@ class Profile extends React.Component {
                 </div>
                 {!this.state.edit ? null : <EditAccount edited={() => this.setState({edit: false})} account={account} />}
                 <div>
-                    <div className="container p-3">
-                        <h1>Transactions for {account.firstName} {account.lastName}</h1>
-                        <ul className="list-group">
-                            {this.props.transactions.map(transaction => {
-                                return(
-                                    transaction.userId === account.id ? <li className={(transaction.type === "Deposit") ? "list-group-item list-group-item-success" : "list-group-item list-group-item-danger"} key={transaction.number}>User {transaction.userId}, {transaction.type}: ${transaction.amount}</li> : null
-                                )
-                            })}
-                        </ul>
-                    </div>
+                    <h3 className="mt-2">Transactions for {account.firstName} {account.lastName}</h3>
+                    <TransactionList profileId={account.id} />
                 </div>
             </div>
         )

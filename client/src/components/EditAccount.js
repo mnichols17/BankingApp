@@ -27,7 +27,7 @@ class EditAccount extends React.Component {
 
     render() {
         return(
-            <form onSubmit={this.onSubmit}>
+            <form className="my-2" onSubmit={this.onSubmit}>
                 <div className="form-group">
                     <label htmlFor="firstName">First Name:</label>
                     <input onChange={this.onChange} value={this.state.firstName} type="text" className="form-control" id="firstName" />
@@ -37,6 +37,7 @@ class EditAccount extends React.Component {
                     <input onChange={this.onChange} value={this.state.lastName} type="text" className="form-control" id="lastName" />
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>
+                <hr />
             </form>
         )
     }
